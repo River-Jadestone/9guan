@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구관명관(九觀名觀) 명인전</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 1)), url('https://i.imgur.com/zesT2sg.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title {
+            font-weight: 900;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #f6ad55;
+        }
+        .tab-button.active {
+            border-color: #f6ad55;
+            color: #f6ad55;
+            background-color: rgba(246, 173, 85, 0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 1500px; /* 포스터 크기를 고려해 높이 증가 */
+        }
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(180deg);
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* [추가됨] 라이트박스 스타일 */
+        #lightbox.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Hero Section -->
+    <header id="home" class="hero-bg min-h-screen flex flex-col items-center justify-center text-center p-4">
+        <div class="bg-black bg-opacity-50 p-8 rounded-xl">
+            <h2 class="text-xl md:text-2xl font-bold text-orange-300 mb-2">"구관(舊官)이 명관(名官)이라"</h2>
+            <h1 class="text-5xl md:text-7xl font-black text-white leading-tight mb-4">구관명관<span class="text-orange-400">(九觀名觀)</span> 명인전</h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-8">전국 아홉 명의 명인을 대구에서 만나다</p>
+            <div class="text-lg text-white mb-8 space-y-2">
+                <p><span class="font-bold text-orange-300">일시:</span> 2025년 11월 07일 (금) 오후 7시</p>
+                <p><span class="font-bold text-orange-300">장소:</span> 꿈꾸는씨어터</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#tickets" class="nav-link cursor-pointer bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">지금 예매하기</a>
+                <a href="#masters" class="nav-link cursor-pointer bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">명인들 미리보기</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 md:py-24 space-y-24">
+        <!-- 초대의 글 Section -->
+        <section id="invitation" class="scroll-reveal">
+            <h2 class="section-title">초대의 글</h2>
+            <div class="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                <div id="tab-buttons" class="flex border-b border-gray-700">
+                    <button class="tab-button active flex-1 py-3 px-4 font-bold text-lg border-b-4 border-transparent transition cursor-pointer" onclick="switchTab('host')">주최자의 글</button>
+                    <button class="tab-button flex-1 py-3 px-4 font-bold text-lg border-b-4 border-transparent transition cursor-pointer" onclick="switchTab('guest')">축사</button>
+                </div>
+                <div class="p-8 md:p-10">
+                    <div id="host" class="tab-content leading-relaxed">
+                        <h3 class="text-2xl font-bold text-orange-300 mb-4">"수백 년을 이어온 장인의 혼, 진정한 한국의 예술 정신과 품격을 만나다"</h3>
+                        <p>이 뜻깊은 자리에 함께하시어 전통이 선사하는 깊은 감동과 환희를 온몸으로 느껴보시길 바랍니다.</p>
+                        <p class="text-right mt-6 font-bold">- 랑전통풍무악예술단 대표 배관호</p>
+                    </div>
+                    <div id="guest" class="tab-content hidden leading-relaxed">
+                        <h3 class="text-2xl font-bold text-orange-300 mb-4">'오래된 것이 명품'이라는 말처럼...</h3>
+                        <p>귀한 발걸음 해주신 모든 분들께 다시 한번 감사드립니다.</p>
+                        <p class="text-right mt-6 font-bold">- (사)대구광역시 국악협회장 김신효</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 명인 소개 Section -->
+        <section id="masters" class="scroll-reveal">
+            <h2 class="section-title">아홉 명의 명인</h2>
+            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">각 지역을 대표하는 이 시대의 전통 지킴이들을 소개합니다. 이름을 클릭하면 상세 프로필과 포스터를 볼 수 있습니다.</p>
+            <div id="accordion" class="max-w-4xl mx-auto space-y-4">
+                <!-- 명인 데이터는 JavaScript로 동적 생성 -->
+            </div>
+        </section>
+
+        <!-- ... (이후 섹션은 동일) ... -->
+        <section id="program" class="scroll-reveal">
+            <h2 class="section-title">공연 순서</h2>
+            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
+                <ol class="space-y-4">
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">1</span><div><strong class="text-orange-300">공연의 문을 열며:</strong> 경상도 문굿 지신밟기 고사소리</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">2</span><div><strong class="text-orange-300">풍물꾼 소리 반주:</strong> 원공스님</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">3</span><div><strong class="text-orange-300">영남문둥북춤:</strong> 안문규</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">4</span><div><strong class="text-orange-300">소고춤:</strong> 손영만</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">5</span><div><strong class="text-orange-300">부포놀음:</strong> 정철기</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">6</span><div><strong class="text-orange-300">김병섭류 설장구:</strong> 유대상</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">7</span><div><strong class="text-orange-300">광양버꾸놀이:</strong> 양향진</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">8</span><div><strong class="text-orange-300">진도북놀이:</strong> 박희정</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">9</span><div><strong class="text-orange-300">금회북춤:</strong> 배관호</div></li>
+                    <li class="flex items-start"><span class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-4 flex-shrink-0">10</span><div><strong class="text-orange-300">북청사자놀음:</strong> 정병인</div></li>
+                     <li class="border-t border-dashed border-gray-600 my-4 pt-4 flex items-start">
+                        <span class="bg-white text-orange-500 rounded-full w-8 h-8 flex items-center justify-center font-black mr-4 flex-shrink-0">★</span>
+                        <div><strong class="text-white">대미를 장식하며:</strong> 아홉 명인들이 즉석에서 펼치는 즉흥 연희!</div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 예매 및 오시는 길 Section -->
+        <section id="tickets" class="scroll-reveal">
+            <h2 class="section-title">예매 및 오시는 길</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-orange-300 mb-4">예매 안내</h3>
+                    <p class="mb-6 text-gray-400">좌석이 한정되어 있으니 조기 예매를 권장합니다.</p>
+                    <div class="space-y-3">
+                        <p><strong class="text-gray-300">📞 전화 예매:</strong> <a href="tel:010-2787-8054" class="hover:text-orange-400">010-2787-8054</a>, <a href="tel:010-9010-7853" class="hover:text-orange-400">010-9010-7853</a></p>
+                        <p class="text-gray-300">📱 온라인 예매:</p>
+                        <img src="https://i.imgur.com/SPo3X7B.png" alt="온라인 예매 QR 코드" class="rounded-lg mt-2">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeWTdkW9V1cZBYd7heHG6uc3mAMhEiNFZbMxO4N8NYqd23hig/viewform" target="_blank" class="mt-4 inline-block w-full text-center bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                            온라인 예매 바로가기
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-orange-300 mb-4">공연장 안내</h3>
+                    <p class="font-bold mb-2">꿈꾸는씨어터</p>
+                    <p class="mb-4 text-gray-400">대구광역시 남구 현충로 148 (대명동, 지하 1층)</p>
+                    <div class="space-y-2 text-gray-300">
+                        <p><strong>🚇 지하철:</strong> 1호선 현충로역 1번 출구에서 도보 10분</p>
+                        <p><strong>🚌 버스:</strong> 300, 306, 518, 651, 달서4-1 (영남이공대 앞 하차)</p>
+                        <p class="mt-4 text-sm text-orange-300">※ 주차장이 협소하니 대중교통 이용을 부탁드립니다.</p>
+                    </div>
+                     <a href="https://map.kakao.com/link/to/꿈꾸는씨어터,35.8450,128.5865" target="_blank" class="mt-6 inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">카카오맵으로 길찾기</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-gray-900 border-t border-gray-800 mt-16">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-500">
+            <p class="font-bold text-lg text-gray-300 mb-2">랑전통풍무악예술단</p>
+            <p class="mb-4">"전통의 숨결로 내일을 두드리는 사람들"</p>
+            <p>&copy; 2025 구관명관 명인전. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- [추가됨] Lightbox Modal -->
+    <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 transition-opacity duration-300">
+        <div class="relative bg-gray-900 p-2 rounded-lg max-w-3xl max-h-[90vh] shadow-2xl">
+            <img id="lightbox-img" src="" alt="확대된 포스터 이미지" class="max-w-full max-h-[85vh] object-contain">
+            <button id="lightbox-close" class="absolute -top-5 -right-5 bg-white text-black rounded-full w-12 h-12 flex items-center justify-center text-3xl font-bold leading-none hover:bg-orange-400 transition">&times;</button>
+        </div>
+    </div>
+
+
+    <script>
+        // 탭 기능
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // [수정됨] 아코디언 데이터에 posterUrl 추가
+        const mastersData = [
+            { name: "배관호", title: "금회북춤", posterUrl: "https://i.imgur.com/vBIM41y.jpeg", quote: "북이 춤추는 마을의 울림, 한 편의 서사시다.", desc: "대구 금회촌에서 태어난 춤으로, 경상도 특유의 덧뵈기 춤사위가 어우러져 고고한 흥과 멋을 자아냅니다.", history: ["現) 달성다사농악(12차진굿) 보존회 대표 이사장", "現) 랑전통풍무악예술단 대표", "ART 풍물굿 FESTA '북춤 100인무' 등 국내외 다수 공연"] },
+            { name: "유대상", title: "김병섭류 설장구", posterUrl: "https://i.imgur.com/Eq2YFPf.jpeg", quote: "장구, 춤, 숨결로 엮은 화려하지만 화려하지 않은 무기교의 기교", desc: "호남우도농악에 뿌리를 둔 설장구로, 다스름, 휘모리, 굿거리 등 화려한 가락의 변주와 춤의 조화를 선보입니다.", history: ["現) 사단법인 달성다사농악 보존회 이사", "2022 제63회 한국민속예술축제 우수상", "2008 안성 바우덕이축제 전국농악경연대회 대상"] },
+            { name: "손영만", title: "금릉빗내농악 상쇠 & 소고춤", posterUrl: "https://i.imgur.com/LhSE2Im.jpeg", quote: "쇠끝으로 빚어내는 김천의 숨결", desc: "김천 특유의 빗내 장단을 품은 쇠놀음과 농악 판굿의 마지막을 장식하는 화려한 고깔 소고춤의 멋을 선보입니다.", history: ["現) 국가 무형문화재 제11-7호 상쇠 역임", "現) 김천금릉빗내농악보존회", "2011 한국민속예술축제 대통령상"] },
+            { name: "양향진", title: "광양버꾸놀이", posterUrl: "https://i.imgur.com/bRR8258.png", quote: "신명과 춤의 완성을 향한 끝없는 구도의 과정", desc: "서남해안 군고권과 섬진강 유역의 특색이 어우러진 버꾸놀이. 북 테두리를 '딱'하고 누벼 치는 독특한 기교가 특징입니다.", history: ["광양 버꾸놀이 원형 보존 및 전승 활동", "명신대 공연예술학과 겸임교수 역임", "2005 임방울국악대전 농악일반부 최우수상"] },
+            { name: "안문규", title: "영남문둥북춤", posterUrl: "https://i.imgur.com/FoZGtwO.jpeg", quote: "한과 웃음이 북으로 번지다", desc: "오광대놀이 '한과장' 속 문둥이가 신세를 한탄하다 세상을 향해 쏟아내는 통쾌한 풍자를 소고 장단과 덧뵈기춤으로 풀어냅니다.", history: ["現) 합천밤마리오광대보존회 회원", "現) 극단 <함께사는세상> 배우", "우포늪 생태축제 '우포따오기춤' 정기 공연"] },
+            { name: "원공스님", title: "영산재 범음·범패", posterUrl: "https://i.imgur.com/wdoP8HD.png", quote: "염불로 깨어난 불모산, 산중법회의 장엄한 '소리 불탑'", desc: "남녘 불교의 음성공양 전통을 한 몸에 품은 범음. 한 음 한 음 뻗어가며 청중의 호흡을 깊게 가라앉힙니다.", history: ["現) 경상남도 무형유산 제41호 <불모산 영산재> 예능보유자", "現) 국가중요무형문화재 제127호 <아랫녘 수륙재> 보존회 이사", "사찰·문화센터 연수에서 구음법 지도"] },
+            { name: "정병인", title: "북청사자놀음", posterUrl: "https://i.imgur.com/iFdLByJ.png", quote: "사람이 사자가 되는 찰나의 변신", desc: "함경남도 북청의 민속놀이로, 다른 사자춤보다 교묘하고 힘찬 동작과 묘기가 특징이며 액운을 쫓고 복을 기원합니다.", history: ["現) 대한민국 문화예술 명인 (북청사_놀음 부문)", "現) 놀이패 '죽자사자' 단장", "영화 <사도>, 드라마 <대풍수> 등 다수 출연"] },
+            { name: "정철기", title: "공주농악 부포놀음", posterUrl: "https://i.imgur.com/hmZhSZk.jpeg", quote: "상모는 하늘과 땅 사이를 꿰는 바늘이다.", desc: "농악 개인놀이 중 상쇠놀이의 백미. 외상모, 양상모 돌리기 등 화려하고 기교 넘치는 상모짓이 돋보이는 무대입니다.", history: ["現) 국가무형문화재 제92호 태평무 이수자", "現) 공주농악보존회 회장", "1993 전주대사습놀이 전국대회 농악부 장원"] },
+            { name: "박희정", title: "김포 들가락·진도북놀이", posterUrl: "https://i.imgur.com/JCcR01n.jpeg", quote: "바람을 타고 나는 북소리, 굿판을 광장으로 확장시키는 힘", desc: "양손에 북채를 들고 추는 쌍북채춤으로, 다듬이질하듯 가락을 치는 사위가 일품인 역동적인 춤입니다.", history: ["現) (사)나라풍물굿 이사장", "現) 김포들가락연구회 대표", "김포 지역 전승학교 지도 (20년 이상)"] }
+        ];
+
+        const accordionContainer = document.getElementById('accordion');
+        mastersData.forEach((master) => {
+            const item = document.createElement('div');
+            item.className = 'accordion-item bg-gray-800 rounded-xl shadow-lg';
+            // [수정됨] 프로필 이미지 제거, 포스터 이미지 추가
+            item.innerHTML = `
+                <button class="accordion-header w-full flex justify-between items-center text-left p-6 cursor-pointer">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">${master.name}</h3>
+                        <p class="text-orange-400">${master.title}</p>
+                    </div>
+                    <svg class="accordion-arrow w-6 h-6 text-gray-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="p-6 pt-0 text-gray-300">
+                        <img src="${master.posterUrl}" alt="${master.name} 포스터" class="poster-image rounded-lg mb-6 cursor-pointer hover:opacity-90 transition-opacity duration-300">
+                        <p class="italic text-orange-200 border-l-4 border-orange-400 pl-4 mb-6">"${master.quote}"</p>
+                        <p class="mb-6">${master.desc}</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            ${master.history.map(h => `<li>${h}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            accordionContainer.appendChild(item);
+        });
+
+        // 아코디언 기능
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.accordion-item.open').forEach(openItem => {
+                    if (openItem !== item) openItem.classList.remove('open');
+                });
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        // 스크롤 애니메이션
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 부드러운 스크롤
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // [추가됨] 라이트박스 기능
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+        }
+
+        accordionContainer.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('poster-image')) {
+                openLightbox(e.target.src);
+            }
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+    </script>
+</body>
+</html>
+
