@@ -54,7 +54,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* [추가됨] 라이트박스 스타일 */
         #lightbox.hidden {
             display: none;
         }
@@ -112,7 +111,7 @@
             </div>
         </section>
 
-        <!-- ... (이후 섹션은 동일) ... -->
+        <!-- 공연 순서 Section -->
         <section id="program" class="scroll-reveal">
             <h2 class="section-title">공연 순서</h2>
             <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
@@ -175,7 +174,7 @@
         </div>
     </footer>
 
-    <!-- [추가됨] Lightbox Modal -->
+    <!-- Lightbox Modal -->
     <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 transition-opacity duration-300">
         <div class="relative bg-gray-900 p-2 rounded-lg max-w-3xl max-h-[90vh] shadow-2xl">
             <img id="lightbox-img" src="" alt="확대된 포스터 이미지" class="max-w-full max-h-[85vh] object-contain">
@@ -193,7 +192,6 @@
             event.currentTarget.classList.add('active');
         }
 
-        // [수정됨] 아코디언 데이터에 posterUrl 추가
         const mastersData = [
             { name: "배관호", title: "금회북춤", posterUrl: "https://i.imgur.com/vBIM41y.jpeg", quote: "북이 춤추는 마을의 울림, 한 편의 서사시다.", desc: "대구 금회촌에서 태어난 춤으로, 경상도 특유의 덧뵈기 춤사위가 어우러져 고고한 흥과 멋을 자아냅니다.", history: ["現) 달성다사농악(12차진굿) 보존회 대표 이사장", "現) 랑전통풍무악예술단 대표", "ART 풍물굿 FESTA '북춤 100인무' 등 국내외 다수 공연"] },
             { name: "유대상", title: "김병섭류 설장구", posterUrl: "https://i.imgur.com/Eq2YFPf.jpeg", quote: "장구, 춤, 숨결로 엮은 화려하지만 화려하지 않은 무기교의 기교", desc: "호남우도농악에 뿌리를 둔 설장구로, 다스름, 휘모리, 굿거리 등 화려한 가락의 변주와 춤의 조화를 선보입니다.", history: ["現) 사단법인 달성다사농악 보존회 이사", "2022 제63회 한국민속예술축제 우수상", "2008 안성 바우덕이축제 전국농악경연대회 대상"] },
@@ -210,7 +208,6 @@
         mastersData.forEach((master) => {
             const item = document.createElement('div');
             item.className = 'accordion-item bg-gray-800 rounded-xl shadow-lg';
-            // [수정됨] 프로필 이미지 제거, 포스터 이미지 추가
             item.innerHTML = `
                 <button class="accordion-header w-full flex justify-between items-center text-left p-6 cursor-pointer">
                     <div>
@@ -233,16 +230,26 @@
             accordionContainer.appendChild(item);
         });
 
-        // 아코디언 기능
+        // [수정됨] 아코디언 기능
         const accordionHeaders = document.querySelectorAll('.accordion-header');
         accordionHeaders.forEach(header => {
             header.addEventListener('click', () => {
                 const item = header.parentElement;
                 const wasOpen = item.classList.contains('open');
+
+                // 다른 열린 항목들 닫기
                 document.querySelectorAll('.accordion-item.open').forEach(openItem => {
-                    if (openItem !== item) openItem.classList.remove('open');
+                    if (openItem !== item) {
+                        openItem.classList.remove('open');
+                    }
                 });
-                if (!wasOpen) item.classList.add('open');
+
+                // 현재 클릭한 항목을 토글 (열려있으면 닫고, 닫혀있으면 열기)
+                if (wasOpen) {
+                    item.classList.remove('open');
+                } else {
+                    item.classList.add('open');
+                }
             });
         });
 
@@ -266,7 +273,7 @@
             });
         });
 
-        // [추가됨] 라이트박스 기능
+        // 라이트박스 기능
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.getElementById('lightbox-close');
